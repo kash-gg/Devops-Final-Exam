@@ -1,0 +1,8 @@
+$failed = $false
+Get-ChildItem -LiteralPath D:\exam-day -Filter *.ps1 | ForEach-Object {
+    $tokens = $null; $errors = $null
+    [System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$errors) | Out-Null
+    if ($errors.Count) { $failed = $true; Write-Output ('FAIL syntax: '+$_.Name); $errors | ForEach-Object { Write-Output $_.Message } }
+    else { Write-Output ('PASS syntax only: '+$_.Name) }
+}
+if ($failed) { exit 1 } else { exit 0 }

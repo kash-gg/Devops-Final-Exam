@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build & Test') {
+            steps {
+                bat 'echo Building Payment and Notification Services...'
+            }
+        }
+        stage('Docker Packaging') {
+            steps {
+                bat 'echo Packaging Payment Gateway Docker Image...'
+            }
+        }
+        stage('Deploy Cluster') {
+            steps {
+                bat 'echo Deploying Payment Backend to Kubernetes...'
+            }
+        }
+    }
+}
+
